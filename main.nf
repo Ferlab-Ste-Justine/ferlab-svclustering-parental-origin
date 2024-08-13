@@ -1,9 +1,9 @@
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    ferlab/mypipeline-nfcore
+    ferlab/svclusteringpo
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Github : https://github.com/ferlab/mypipeline
+    Github : https://github.com/ferlab/svclusteringpo
 ----------------------------------------------------------------------------------------
 */
 
@@ -15,9 +15,9 @@ nextflow.enable.dsl = 2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { MYPIPELINE  } from './workflows/mypipeline'
-include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_mypipeline_pipeline'
-include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_mypipeline_pipeline'
+include { SVCLUSTERINGPO          } from './workflows/svclusteringpo'
+include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_svclusteringpo_pipeline'
+include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_svclusteringpo_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -28,7 +28,7 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_mypi
 //
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
-workflow FERLAB_MYPIPELINE {
+workflow FERLAB_SVCLUSTERINGPO {
 
     take:
     samplesheet // channel: samplesheet read in from --input
@@ -38,12 +38,12 @@ workflow FERLAB_MYPIPELINE {
     //
     // WORKFLOW: Run pipeline
     //
-    MYPIPELINE (
+    SVCLUSTERINGPO (
         samplesheet
     )
 
     emit:
-    multiqc_report = MYPIPELINE.out.multiqc_report // channel: /path/to/multiqc_report.html
+    multiqc_report = SVCLUSTERINGPO.out.multiqc_report // channel: /path/to/multiqc_report.html
 
 }
 /*
@@ -72,7 +72,7 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    FERLAB_MYPIPELINE (
+    FERLAB_SVCLUSTERINGPO (
         PIPELINE_INITIALISATION.out.samplesheet
     )
 

@@ -1,6 +1,6 @@
 {
-  "name": "ferlab/mypipeline",
-  "homePage": "https://github.com/ferlab/mypipeline",
+  "name": "ferlab/svclusteringpo",
+  "homePage": "https://github.com/ferlab/svclusteringpo",
   "repos": {
     "https://github.com/nf-core/modules.git": {
       "subworkflows": {
