@@ -4,8 +4,9 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { paramsSummaryMap       } from 'plugin/nf-validation'
-include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { paramsSummaryMap          } from 'plugin/nf-validation'
+include { softwareVersionsToYAML    } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { PREPROCESSING             } from '../modules/local/preprocessing/preprocessing.nf'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -24,7 +25,15 @@ workflow SVCLUSTERINGPO {
 
     //
     // MODULE: Run your modules
-    //
+    
+    PREPROCESSING(ch_samplesheet)
+    vcfdel = PREPROCESSING.out.vcfdel
+    vcfdup = PREPROCESSING.out.vcfdup
+    beddel = PREPROCESSING.out.beddel
+    beddup = PREPROCESSING.out.beddup
+    vcfmod = PREPROCESSING.out.vcfmod
+    ploidy = PREPROCESSING.out.ploidy
+
     //
     // Collate and save software versions
     //

@@ -82,7 +82,6 @@ workflow PIPELINE_INITIALISATION {
             meta, vcf ->
             [meta.familyId, meta.sample,vcf]
         }
-        .tap{ch_samplesheet_simple}
         .groupTuple()
         .map{
             
@@ -91,16 +90,12 @@ workflow PIPELINE_INITIALISATION {
             fmeta.size = samples.size()
             [familyId, fmeta, samples, vcfs]
         }
-        .view()
         .set { ch_samplesheet }
   
     emit:
     samplesheet = ch_samplesheet
     versions    = ch_versions
-
-    emit:
-    samplesheet = ch_samplesheet
-    versions    = ch_versions
+    
 }
 
 /*
