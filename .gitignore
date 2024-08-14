@@ -1,0 +1,5 @@
+# Nextflow logs
+*.log*
+
+# Local param file
+nf-param.json
