@@ -3,3 +3,6 @@
 
 # Local param file
 nf-param.json
+
+#Work dir
+work/*
