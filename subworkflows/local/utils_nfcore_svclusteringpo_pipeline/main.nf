@@ -78,20 +78,25 @@ workflow PIPELINE_INITIALISATION {
     //
     Channel
         .fromSamplesheet("input")
-        .map {
-            meta, fastq_1, fastq_2 ->
-                if (!fastq_2) {
-                    return [ meta.id, meta + [ single_end:true ], [ fastq_1 ] ]
-                } else {
-                    return [ meta.id, meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
-                }
+        .map{
+            meta, vcf ->
+            [meta.familyId, meta.sample,vcf]
         }
+        .tap{ch_samplesheet_simple}
         .groupTuple()
-        .map {
-            meta, fastqs ->
-                return [ meta, fastqs.flatten() ]
+        .map{
+            
+            familyId, samples, vcfs ->
+            fmeta = [:]
+            fmeta.size = samples.size()
+            [familyId, fmeta, samples, vcfs]
         }
+        .view()
         .set { ch_samplesheet }
+  
+    emit:
+    samplesheet = ch_samplesheet
+    versions    = ch_versions
 
     emit:
     samplesheet = ch_samplesheet
