@@ -4,9 +4,10 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { paramsSummaryMap          } from 'plugin/nf-validation'
-include { softwareVersionsToYAML    } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { PREPROCESSING             } from '../modules/local/preprocessing/preprocessing.nf'
+include { paramsSummaryMap            } from 'plugin/nf-validation'
+include { softwareVersionsToYAML      } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { PREPROCESSING               } from '../modules/local/preprocessing/preprocessing.nf'
+include { SVCLUSTERINGDUP             } from '../modules/local/svclustering/svclusteringdup.nf'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -33,6 +34,14 @@ workflow SVCLUSTERINGPO {
     beddup = PREPROCESSING.out.beddup
     vcfmod = PREPROCESSING.out.vcfmod
     ploidy = PREPROCESSING.out.ploidy
+
+    SVCLUSTERINGDUP(
+        vcfdup, 
+        ploidy,
+        params.fasta,
+        params.fasta_fai,
+        params.fasta_dict,
+        )
 
     //
     // Collate and save software versions
