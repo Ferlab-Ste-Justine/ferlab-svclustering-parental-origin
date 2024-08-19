@@ -11,20 +11,18 @@ process PREPROCESSING {
     tuple  val(familyId), val(fmeta), val(samples) , path(vcfs)
 
     output:
-    path("*.DEL.vcf"),       emit: vcfdel
-    path("*.DUP.vcf"),       emit: vcfdup
-    path("*.DEL.bed"),       emit: beddel
-    path("*.DUP.bed"),       emit: beddup
-    path("*.mod.vcf"),       emit: vcfmod
-    path "ploidy-table.tsv", emit: ploidy
-    path "versions.yml",     emit: versions 
-    
-    
+    tuple val(familyId), path("*.DEL.vcf"), emit: vcfdel
+    tuple val(familyId), path("*.DUP.vcf"), emit: vcfdup
+    tuple val(familyId), path("*.DEL.bed"), emit: beddel
+    tuple val(familyId), path("*.DUP.bed"), emit: beddup
+    tuple val(familyId), path("*.mod.vcf"), emit: vcfmod
+    path "ploidy-table.tsv",                emit: ploidy
+    path "versions.yml",                    emit: versions 
+        
     script:
     def sample_ids = samples.join(' ')
     """
     python ${moduleDir}/bin/sample_preprocessing.py --sample_id $sample_ids --path $vcfs
-
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -32,7 +30,5 @@ process PREPROCESSING {
     END_VERSIONS
     
     """
-
-   
     
 }

@@ -1,8 +1,9 @@
 # Nextflow logs
 *.log*
+.nextflow
 
 # Local param file
-nf-param.json
+nf-params.json
 
 #Work dir
 work/*
