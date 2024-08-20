@@ -54,6 +54,7 @@ workflow SVCLUSTERINGPO {
     beddup = PREPROCESSING.out.beddup
     vcfmod = PREPROCESSING.out.vcfmod
     ploidy = PREPROCESSING.out.ploidy
+    ch_versions = ch_versions.mix(PREPROCESSING.out.versions)
 
     SVCLUSTERINGDUP(
         vcfdup, 
@@ -62,6 +63,7 @@ workflow SVCLUSTERINGPO {
         params.fasta_fai,
         params.fasta_dict,
         )
+    ch_versions = ch_versions.mix(SVCLUSTERINGDUP.out.versions)
 
     SVCLUSTERINGDEL(
         vcfdel, 
@@ -70,7 +72,7 @@ workflow SVCLUSTERINGPO {
         params.fasta_fai,
         params.fasta_dict,
         )
-
+    ch_versions = ch_versions.mix(SVCLUSTERINGDEL.out.versions)
     //
     // Collate and save software versions
     //

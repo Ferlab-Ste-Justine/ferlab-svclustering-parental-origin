@@ -26,7 +26,7 @@ process PREPROCESSING {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        python ${moduleDir}/bin/sample_preprocessing: \$(python sample_preprocessing.py --version | sed 's/sample_preprocessing.py version//')
+        sample_preprocessing: \$(python ${moduleDir}/bin/sample_preprocessing.py --version | sed 's/sample_preprocessing.py version//')
     END_VERSIONS
     
     """
