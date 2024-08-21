@@ -73,6 +73,7 @@ workflow SVCLUSTERINGPO {
         params.fasta_dict,
         )
     ch_versions = ch_versions.mix(SVCLUSTERINGDEL.out.versions)
+    
     //
     // Collate and save software versions
     //
