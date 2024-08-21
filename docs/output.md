@@ -20,8 +20,8 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
   - `preprocessing/`
     - ${sample}.cnv.mod.vcf : The original vcf with additional annotations
     - ${sample}.cnv.mod.(DEL/DUP).vcf : The modified version of each VCF, split by DUP and DEL.
-    - ploidy_table.tsv
     - ${sample}.cnv.mod.(DEL/DUP).bed
+    - ploidy_table.tsv
   - `svclusteringdup/`
     - ${familyId}.MAX_CLIQUE_RO80.DUP.vcf : The vcf with CNV DUP cluster per family
   - `svclusteringdel/`
