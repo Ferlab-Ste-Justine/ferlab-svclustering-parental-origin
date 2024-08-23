@@ -164,6 +164,37 @@
           "hidden": true
         }
       }
+    },
+    "new_group_1": {
+      "title": "New Group 1",
+      "type": "object",
+      "description": "",
+      "default": "",
+      "properties": {
+        "clustering_algorithm": {
+          "type": "string",
+          "default": "SINGLE_LINKAGE",
+          "description": "Type (CLUSTER_ALGORITHM)",
+          "enum": ["DEFRAGMENT_CNV", "SINGLE_LINKAGE", "MAX_CLIQUE"]
+        },
+        "overlap": {
+          "type": "number",
+          "default": 0.8,
+          "description": "Minimum interval reciprocal overlap fraction to cluster depth-only/depth-only variant pairs."
+        },
+        "breakpoint_strategy": {
+          "type": "string",
+          "default": "MIN_START_MAX_END",
+          "description": "Strategy to use for choosing a representative value for a breakpoint cluster",
+          "enum": [
+            "MEDIAN_START_MEDIAN_END",
+            "MIN_START_MAX_END",
+            "MAX_START_MIN_END",
+            "MEAN_START_MEAN_END"
+          ],
+          "help_text": " Strategy to use for choosing a representative value for a breakpoint cluster.\n\nThe --breakpoint-summary-strategy argument is an enumerated type (BreakpointSummaryStrategy), which can have one of the following values:\n\nMEDIAN_START_MEDIAN_END\n    Use the (first) middle value to summarize cluster starts and ends, such that the start and end were seen in the data\nMIN_START_MAX_END\n    A conservative strategy to summarize a cluster by its smallest extent\nMAX_START_MIN_END\n    A permissive strategy to summarize a cluster by it largest extent\nMEAN_START_MEAN_END\n    Summarize a cluster using the mean value for each end, even if that value was not represented in any sample "
+        }
+      }
     }
   },
   "allOf": [
@@ -178,6 +209,9 @@
     },
     {
       "$ref": "#/definitions/generic_options"
+    },
+    {
+      "$ref": "#/definitions/new_group_1"
     }
   ],
   "properties": {

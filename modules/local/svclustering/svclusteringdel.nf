@@ -19,12 +19,17 @@ process SVCLUSTERINGDEL {
     path "versions.yml", emit: versions
    
     script:
-    def dels = vcfdel.join(' -V ')
+    def args                 = task.ext.args ?: ''
+    def dels                 = vcfdel.join(' -V ')
+    def clustering_algorithm = params.clustering_algorithm
+    def overlap              = params.overlap
+    def breakpoint_strategy  = params.breakpoint_strategy
     """
     gatk SVCluster --output ${familyId}.MAX_CLIQUE_RO80.DEL.vcf.gz -V $dels \
-     --ploidy-table $ploidy --algorithm MAX_CLIQUE \
-     --reference $fasta --depth-interval-overlap 0.8 \
-     --breakpoint-summary-strategy MIN_START_MAX_END
+     --ploidy-table $ploidy --algorithm $clustering_algorithm \
+     --reference $fasta --depth-interval-overlap $overlap \
+     --breakpoint-summary-strategy $breakpoint_strategy \
+     $args
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
