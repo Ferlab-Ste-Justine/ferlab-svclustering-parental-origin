@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Check input, and mandatory params
 - Enabled moduleBinaries on config files
 - Support for conda and docker
+- [#1](https://github.com/Ferlab-Ste-Justine/ferlab-svclustering-parental-origin/pull/1) call sample_preprocessing.py script via module binaries feature
 
 ### `Changed`
 

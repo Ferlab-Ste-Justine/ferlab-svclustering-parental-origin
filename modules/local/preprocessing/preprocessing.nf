@@ -22,7 +22,7 @@ process PREPROCESSING {
     script:
     def sample_ids = samples.join(' ')
     """
-    python ${moduleDir}/resources/usr/bin/sample_preprocessing.py --sample_id $sample_ids --path $vcfs
+    sample_preprocessing.py --sample_id $sample_ids --path $vcfs
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
