@@ -28,6 +28,18 @@
           "format": "directory-path",
           "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
           "fa_icon": "fas fa-folder-open"
+        },
+        "dup_outdir": {
+          "type": "string",
+          "description": "When specified, publishes the DUP cluster files in this directory",
+          "format": "directory-path",
+          "fa_icon": "fas fa-folder-open"
+        },
+        "del_outdir": {
+          "type": "string",
+          "description": "When specified, publishes the DEL cluster files in this directory",
+          "format": "directory-path",
+          "fa_icon": "fas fa-folder-open"
         }
       }
     },

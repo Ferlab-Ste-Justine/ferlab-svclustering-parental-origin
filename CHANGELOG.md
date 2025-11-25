@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.1.3] - 2025-11-25
+
+### `Added`
+- [#3](https://github.com/Ferlab-Ste-Justine/ferlab-svclustering-parental-origin/pull/3) add extra parameters dup_outdir and del_outdir to customize output folders for dup and del clusters
+
+### `Changed`
+- [#3](https://github.com/Ferlab-Ste-Justine/ferlab-svclustering-parental-origin/pull/3) output filenames now dynamically reflect the clustering algorithm and reciprocal overlap threshold
+
+
 ## [v1.1.2] - 2025-11-18
 
 ### `Changed`
