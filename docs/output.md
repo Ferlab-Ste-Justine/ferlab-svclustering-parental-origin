@@ -23,10 +23,23 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
     - ${sample}.cnv.mod.(DEL/DUP).bed
     - ploidy_table.tsv
   - `svclusteringdup/`
-    - ${familyId}.MAX_CLIQUE_RO80.DUP.vcf : The vcf with CNV DUP cluster per family
+    - ${familyId}.SINGLE_LINKAGE_RO80.DUP.vcf.gz : The vcf with CNV DUP cluster per family
   - `svclusteringdel/`
-    - ${familyId}.MAX_CLIQUE_RO80.DEL.vcf : The vcf with CNV DEL cluster per family
+    - ${familyId}.SINGLE_LINKAGE_RO80.DEL.vcf.gz : The vcf with CNV DEL cluster per family
 
 </details>
 
 [Nextflow](https://www.nextflow.io/docs/latest/tracing.html) provides excellent functionality for generating various reports relevant to the running and execution of the pipeline. This will allow you to troubleshoot errors with the running of the pipeline, and also provide you with other information such as launch commands, run times and resource usage.
+
+### Customize the output folders
+
+By default, the main output files (DUP clusters and DEL clusters) are saved in the main output directory specified by the `outdir` parameter, within a subfolder named after the process that generated them (see Pipeline Information above).
+
+If you prefer, you can set custom output directories for these files using the `dup_outdir` and `del_outdir` configuration parameters.
+
+Regardless of the output directory chosen, the filenames for these cluster files will follow this pattern: 
+"`${familyId}`.`${clustering_algorithm}`_RO`${reciprocal_overlap_in_percent}`.`${variant_type}`.vcf.gz"
+
+For example:
+- `123.SINGLE_LINKAGE_RO80.DEL.vcf.gz`
+- `123.SINGLE_LINKAGE_RO80.DUP.vcf.gz`

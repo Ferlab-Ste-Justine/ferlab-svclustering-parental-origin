@@ -24,8 +24,9 @@ process SVCLUSTERINGDUP {
     def clustering_algorithm = params.clustering_algorithm
     def overlap              = params.overlap
     def breakpoint_strategy  = params.breakpoint_strategy
+    def output_file          = "${familyId}.${clustering_algorithm.toUpperCase()}_RO${Math.round(overlap * 100)}.DUP.vcf.gz"
     """
-    gatk SVCluster --output ${familyId}.MAX_CLIQUE_RO80.DUP.vcf.gz -V $dups \
+    gatk SVCluster --output ${output_file} -V $dups \
      --ploidy-table $ploidy --algorithm $clustering_algorithm \
      --reference $fasta --depth-interval-overlap $overlap \
      --breakpoint-summary-strategy $breakpoint_strategy \
