@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.1.4] - 2026-01-23
+
+### `Fixed`
+- [#4](https://github.com/Ferlab-Ste-Justine/ferlab-svclustering-parental-origin/pull/4) Fix ALGORITHMS not being added to INFO field when column starts with END.
+
 ## [v1.1.3] - 2025-11-25
 
 ### `Added`
